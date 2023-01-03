@@ -294,7 +294,6 @@ if (
   JSON.parse( Buffer.from( existing_profile ).toString() )[ "bio" ] != local_bio ||
   JSON.parse( Buffer.from( existing_profile ).toString() )[ "image" ] != local_image
 ) await publicDrive.put( '/profile.json', b4a.from( JSON.stringify( profile_to_set ) ) );
-console.log( "my profile:", JSON.parse( Buffer.from( existing_profile ).toString() ) );
 
 const server = new Server( slashtag, {
   //the variable called token contains the user's clientid
