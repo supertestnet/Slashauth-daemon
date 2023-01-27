@@ -178,7 +178,9 @@ const requestListener = function( request, response ) {
         }
         if ( !authenticated ) {
           //if the user did not authenticate yet but they are in the db, pass them the slash-auth url so they can authenticate
-          sendResponse( response, "slash-auth:" + slashtag.url.substring( slashtag.url.indexOf( ":" ) + 1 ) + '?q=' + clientid, 200, {'Content-Type': 'text/plain'} );
+          var slashAuthUrl = SlashURL.format(slashtag.key, {protocol: 'slashauth', query: {q: clientid }});
+          sendResponse( response, slashAuthUrl, 200, {'Content-Type': 'text/plain'} );
+          //sendResponse( response, "slash-auth:" + slashtag.url.substring( slashtag.url.indexOf( ":" ) + 1 ) + '?q=' + clientid, 200, {'Content-Type': 'text/plain'} );
         } else {
           //if the user did authenticate properly, pass the authenticated user's profile object (including their slashtag) so my php app can use it
           //to find their account or create it. I used to clear the authenticated user from the db here but later I decided against it because if the
